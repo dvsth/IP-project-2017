@@ -26,7 +26,9 @@ public class HomeForm extends javax.swing.JFrame {
         DesktopPane.setSize(super.getSize());
         quesInternalFrame.setSize(250, 350);
         quesPanel.setSize(quesInternalFrame.getSize());
-
+        quesPanel.setDB(dbHandler);
+        quesPanel.setParent(quesInternalFrame);
+        
     }
 
     /**
@@ -45,6 +47,7 @@ public class HomeForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         quesInternalFrame.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        quesInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         quesInternalFrame.setMaximumSize(new java.awt.Dimension(250, 350));
         quesInternalFrame.setMinimumSize(new java.awt.Dimension(250, 350));
         quesInternalFrame.setPreferredSize(new java.awt.Dimension(250, 350));
@@ -58,16 +61,13 @@ public class HomeForm extends javax.swing.JFrame {
         quesInternalFrame.getContentPane().setLayout(quesInternalFrameLayout);
         quesInternalFrameLayout.setHorizontalGroup(
             quesInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quesInternalFrameLayout.createSequentialGroup()
-                .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+            .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         quesInternalFrameLayout.setVerticalGroup(
             quesInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quesInternalFrameLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
@@ -76,15 +76,15 @@ public class HomeForm extends javax.swing.JFrame {
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopPaneLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopPaneLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         DesktopPane.setLayer(quesInternalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
