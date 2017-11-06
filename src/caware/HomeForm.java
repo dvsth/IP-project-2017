@@ -15,7 +15,7 @@ import javax.swing.JInternalFrame;
 public class HomeForm extends javax.swing.JFrame {
 
     private DBHandler dbHandler;
-    
+        
     /**
      * Creates new form HomeForm
      */
@@ -43,10 +43,14 @@ public class HomeForm extends javax.swing.JFrame {
         DesktopPane = new javax.swing.JDesktopPane();
         quesInternalFrame = new javax.swing.JInternalFrame();
         quesPanel = new caware.InfoPanel();
+        MainMenu = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        quesInternalFrame.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        quesInternalFrame.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         quesInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         quesInternalFrame.setMaximumSize(new java.awt.Dimension(250, 350));
         quesInternalFrame.setMinimumSize(new java.awt.Dimension(250, 350));
@@ -61,13 +65,13 @@ public class HomeForm extends javax.swing.JFrame {
         quesInternalFrame.getContentPane().setLayout(quesInternalFrameLayout);
         quesInternalFrameLayout.setHorizontalGroup(
             quesInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(quesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         quesInternalFrameLayout.setVerticalGroup(
             quesInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quesInternalFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
@@ -84,9 +88,25 @@ public class HomeForm extends javax.swing.JFrame {
             .addGroup(DesktopPaneLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         DesktopPane.setLayer(quesInternalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        MainMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jMenu1.setText("Survey");
+        jMenu1.setName(""); // NOI18N
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Start New Basic Details");
+        jMenu1.add(jMenuItem1);
+
+        MainMenu.add(jMenu1);
+
+        jMenu2.setText("Results");
+        MainMenu.add(jMenu2);
+
+        setJMenuBar(MainMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +125,10 @@ public class HomeForm extends javax.swing.JFrame {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
+    private javax.swing.JMenuBar MainMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JInternalFrame quesInternalFrame;
     private caware.InfoPanel quesPanel;
     // End of variables declaration//GEN-END:variables
