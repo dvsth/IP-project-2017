@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package caware;
+
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -12,13 +13,37 @@ package caware;
  */
 public class QuestionPanel extends javax.swing.JPanel {
 
+    private DBHandler dbHandler;
+    private String[] responses;
+    private JInternalFrame parentFrame;
+    private QuestionFeeder questionFeeder;
+    
     /**
      * Creates new form QuestionPanel
      */
     public QuestionPanel() {
         initComponents();
+        responses = new String[24];
+        questionFeeder = new QuestionFeeder();
+        
     }
 
+    public void setParent(JInternalFrame parent) {
+        parentFrame = parent;
+    }
+
+    public void setDB(DBHandler db) {
+
+        dbHandler = db;
+        System.out.println("db set");
+    }
+
+    public void setLanguage(int i){
+    
+        questionFeeder.setLanguage(i);
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,19 +53,49 @@ public class QuestionPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblQuestion = new javax.swing.JLabel();
+        btnYes = new javax.swing.JButton();
+        btnNo = new javax.swing.JButton();
+
+        lblQuestion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblQuestion.setText("jLabel1");
+
+        btnYes.setText("Yes");
+
+        btnNo.setText("No");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblQuestion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(lblQuestion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnYes)
+                    .addComponent(btnNo))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNo;
+    private javax.swing.JButton btnYes;
+    private javax.swing.JLabel lblQuestion;
     // End of variables declaration//GEN-END:variables
 }

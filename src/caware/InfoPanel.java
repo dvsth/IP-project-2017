@@ -28,7 +28,7 @@ public class InfoPanel extends javax.swing.JPanel {
     public InfoPanel() {
 
         initComponents();
-        responses = new String[28];
+        responses = new String[4];
         
     }
     
@@ -50,9 +50,7 @@ public class InfoPanel extends javax.swing.JPanel {
         responses[1] = mf;
         responses[2] = edu;
         responses[3] = name;
-        for(int i = 4; i < responses.length; i++){
-            responses[i] = "na";
-        }
+        
     }
     
        
@@ -234,7 +232,7 @@ public class InfoPanel extends javax.swing.JPanel {
         
         fetchDetails();
         populateArray();
-        dbHandler.addSurveyResponse(responses);
+        dbHandler.addInfoResponse(responses);
         parentFrame.doDefaultCloseAction();
                 
     }//GEN-LAST:event_btnNextActionPerformed

@@ -132,20 +132,18 @@ public class DBHandler {
 
     }
 
-    public void addSurveyResponse(String[] inputResponses) {
+    public void addInfoResponse(String[] inputResponses) {
 
         //initialize array containing all questions
 //        QUESTION_ARRAY = new String[]{DEM_AGE, DEM_SEX, DEM_EDU, DEM_NAME, QUES_1, QUES_2, QUES_3,
 //            QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13,
 //            QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, QUES_23, QUES_24};
 
-        String INSERT_RESPONSE = "INSERT INTO RESPONSES(AGE, SEX, EDU, NAME, QUES_1, QUES_2, QUES_3,"
-                + " QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13, "
-                + "QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, "
-                + "QUES_23, QUES_24) VALUES("
-                + "? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? "
-                + ", ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+        String INSERT_RESPONSE = "INSERT INTO RESPONSES(AGE, SEX, EDU, NAME) "
+                + "VALUES(? , ? , ? , ? )";
 
+       
+        
         try {
             PreparedStatement stmt = connection.prepareStatement(INSERT_RESPONSE);
             for (int i = 1; i < inputResponses.length + 1; i++) {
@@ -157,11 +155,46 @@ public class DBHandler {
             stmt.execute();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e  + "ajsghdjkgadsj");
+            JOptionPane.showMessageDialog(null, e);
         }
 
     }
 
+    
+    public void addQuestionResponse(String[] inputResponses) {
+
+        //initialize array containing all questions
+//        QUESTION_ARRAY = new String[]{DEM_AGE, DEM_SEX, DEM_EDU, DEM_NAME, QUES_1, QUES_2, QUES_3,
+//            QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13,
+//            QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, QUES_23, QUES_24};
+
+         String INSERT_RESPONSE = "INSERT INTO RESPONSES(QUES_1, QUES_2, QUES_3,"
+                + " QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13, "
+                + "QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, "
+                + "QUES_23, QUES_24) VALUES("
+                + "? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? "
+                + ", ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+
+       
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(INSERT_RESPONSE);
+            for (int i = 1; i < inputResponses.length + 1; i++) {
+
+                stmt.setString(i, inputResponses[i-1]);
+                
+            }
+            System.out.println(stmt.toString());
+            stmt.execute();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+    
+    
+    
 //    public void writeToCSV() {
 //
 //        //if you ever want to create unique exports per attempt
