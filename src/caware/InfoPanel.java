@@ -41,7 +41,7 @@ public class InfoPanel extends javax.swing.JPanel {
     public void setDB(DBHandler db) {
     
         dbHandler = db;
-        
+        System.out.println("db set");
     }
     
     private void populateArray(){
@@ -235,8 +235,8 @@ public class InfoPanel extends javax.swing.JPanel {
         fetchDetails();
         populateArray();
         dbHandler.addSurveyResponse(responses);
-        parentFrame.dispose();
-        
+        parentFrame.doDefaultCloseAction();
+                
     }//GEN-LAST:event_btnNextActionPerformed
 
 

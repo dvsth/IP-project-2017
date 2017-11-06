@@ -22,13 +22,20 @@ public class HomeForm extends javax.swing.JFrame {
     public HomeForm(DBHandler db) {
         initComponents();
         
+        //assign database
         dbHandler = db;
+        
+        //clean-up UI layout
         DesktopPane.setSize(super.getSize());
         quesInternalFrame.setSize(250, 350);
         quesPanel.setSize(quesInternalFrame.getSize());
         quesPanel.setDB(dbHandler);
         quesPanel.setParent(quesInternalFrame);
         
+        //language settings - group radiobuttons
+        btnGroupLanguage.add(rbHindi);
+        btnGroupLanguage.add(rbEnglish);
+
     }
 
     /**
@@ -40,18 +47,25 @@ public class HomeForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupLanguage = new javax.swing.ButtonGroup();
         DesktopPane = new javax.swing.JDesktopPane();
         quesInternalFrame = new javax.swing.JInternalFrame();
         quesPanel = new caware.InfoPanel();
         MainMenu = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuSurvey = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuResults = new javax.swing.JMenu();
+        menuSettings = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        rbHindi = new javax.swing.JRadioButtonMenuItem();
+        rbEnglish = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         quesInternalFrame.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         quesInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        quesInternalFrame.setTitle("Survey - Step 1");
+        quesInternalFrame.setToolTipText("Survey - Step 1");
         quesInternalFrame.setMaximumSize(new java.awt.Dimension(250, 350));
         quesInternalFrame.setMinimumSize(new java.awt.Dimension(250, 350));
         quesInternalFrame.setPreferredSize(new java.awt.Dimension(250, 350));
@@ -94,17 +108,34 @@ public class HomeForm extends javax.swing.JFrame {
 
         MainMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jMenu1.setText("Survey");
-        jMenu1.setName(""); // NOI18N
+        menuSurvey.setText("Survey");
+        menuSurvey.setName(""); // NOI18N
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Start New Basic Details");
-        jMenu1.add(jMenuItem1);
+        menuSurvey.add(jMenuItem1);
 
-        MainMenu.add(jMenu1);
+        MainMenu.add(menuSurvey);
 
-        jMenu2.setText("Results");
-        MainMenu.add(jMenu2);
+        menuResults.setText("Results");
+        MainMenu.add(menuResults);
+
+        menuSettings.setText("Settings");
+        menuSettings.add(jSeparator1);
+
+        rbHindi.setText("Hindi");
+        rbHindi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbHindiActionPerformed(evt);
+            }
+        });
+        menuSettings.add(rbHindi);
+
+        rbEnglish.setSelected(true);
+        rbEnglish.setText("English");
+        menuSettings.add(rbEnglish);
+
+        MainMenu.add(menuSettings);
 
         setJMenuBar(MainMenu);
 
@@ -122,14 +153,23 @@ public class HomeForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rbHindiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHindiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbHindiActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MainMenu;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.ButtonGroup btnGroupLanguage;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu menuResults;
+    private javax.swing.JMenu menuSettings;
+    private javax.swing.JMenu menuSurvey;
     private javax.swing.JInternalFrame quesInternalFrame;
     private caware.InfoPanel quesPanel;
+    private javax.swing.JRadioButtonMenuItem rbEnglish;
+    private javax.swing.JRadioButtonMenuItem rbHindi;
     // End of variables declaration//GEN-END:variables
 }
