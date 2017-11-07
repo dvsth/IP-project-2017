@@ -17,6 +17,7 @@ public class QuestionPanel extends javax.swing.JPanel {
     private String[] responses;
     private JInternalFrame parentFrame;
     private QuestionFeeder questionFeeder;
+    private int questionIndex; //zero-based index
     
     /**
      * Creates new form QuestionPanel
@@ -44,6 +45,14 @@ public class QuestionPanel extends javax.swing.JPanel {
         
     }
     
+    public void initiate(){
+    
+        lblQuestion.setText(questionFeeder.nextQuestion());
+        
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,38 +66,46 @@ public class QuestionPanel extends javax.swing.JPanel {
         btnYes = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Survey Questions"));
+
         lblQuestion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblQuestion.setText("jLabel1");
 
+        btnYes.setBackground(new java.awt.Color(0, 102, 51));
+        btnYes.setForeground(new java.awt.Color(255, 255, 255));
         btnYes.setText("Yes");
 
+        btnNo.setBackground(new java.awt.Color(204, 0, 0));
+        btnNo.setForeground(new java.awt.Color(255, 255, 255));
         btnNo.setText("No");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblQuestion)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 79, Short.MAX_VALUE)
+                        .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 81, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(lblQuestion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnYes)
-                    .addComponent(btnNo))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(btnNo)
+                    .addComponent(btnYes))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

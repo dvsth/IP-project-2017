@@ -27,7 +27,11 @@ public class HomeForm extends javax.swing.JFrame {
         
         //clean-up UI layout
         DesktopPane.setSize(super.getSize());
-        quesInternalFrame.setSize(250, 350);
+        detailsInternalFrame.setSize(250, 350);
+        detailPanel.setSize(detailsInternalFrame.getSize());
+        detailPanel.setDB(dbHandler);
+        detailPanel.setParent(detailsInternalFrame);
+        
         quesPanel.setSize(quesInternalFrame.getSize());
         quesPanel.setDB(dbHandler);
         quesPanel.setParent(quesInternalFrame);
@@ -49,8 +53,10 @@ public class HomeForm extends javax.swing.JFrame {
 
         btnGroupLanguage = new javax.swing.ButtonGroup();
         DesktopPane = new javax.swing.JDesktopPane();
+        detailsInternalFrame = new javax.swing.JInternalFrame();
+        detailPanel = new caware.InfoPanel();
         quesInternalFrame = new javax.swing.JInternalFrame();
-        quesPanel = new caware.InfoPanel();
+        quesPanel = new caware.QuestionPanel();
         MainMenu = new javax.swing.JMenuBar();
         menuSurvey = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -62,30 +68,50 @@ public class HomeForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        quesInternalFrame.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        quesInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        quesInternalFrame.setTitle("Survey - Step 1");
-        quesInternalFrame.setToolTipText("Survey - Step 1");
-        quesInternalFrame.setMaximumSize(new java.awt.Dimension(250, 350));
-        quesInternalFrame.setMinimumSize(new java.awt.Dimension(250, 350));
-        quesInternalFrame.setPreferredSize(new java.awt.Dimension(250, 350));
-        quesInternalFrame.setVisible(true);
+        detailsInternalFrame.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        detailsInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        detailsInternalFrame.setTitle("Survey - Step 1");
+        detailsInternalFrame.setToolTipText("Survey - Step 1");
+        detailsInternalFrame.setMaximumSize(new java.awt.Dimension(250, 350));
+        detailsInternalFrame.setMinimumSize(new java.awt.Dimension(250, 350));
+        detailsInternalFrame.setPreferredSize(new java.awt.Dimension(250, 350));
+        detailsInternalFrame.setVisible(true);
 
-        quesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Basic Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        quesPanel.setMaximumSize(new java.awt.Dimension(250, 350));
-        quesPanel.setMinimumSize(new java.awt.Dimension(0, 0));
+        detailPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Basic Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        detailPanel.setMaximumSize(new java.awt.Dimension(250, 350));
+        detailPanel.setMinimumSize(new java.awt.Dimension(0, 0));
+
+        javax.swing.GroupLayout detailsInternalFrameLayout = new javax.swing.GroupLayout(detailsInternalFrame.getContentPane());
+        detailsInternalFrame.getContentPane().setLayout(detailsInternalFrameLayout);
+        detailsInternalFrameLayout.setHorizontalGroup(
+            detailsInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(detailPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        detailsInternalFrameLayout.setVerticalGroup(
+            detailsInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detailsInternalFrameLayout.createSequentialGroup()
+                .addComponent(detailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        quesInternalFrame.setTitle("Survey - Step 2");
+        quesInternalFrame.setVisible(true);
 
         javax.swing.GroupLayout quesInternalFrameLayout = new javax.swing.GroupLayout(quesInternalFrame.getContentPane());
         quesInternalFrame.getContentPane().setLayout(quesInternalFrameLayout);
         quesInternalFrameLayout.setHorizontalGroup(
             quesInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(quesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(quesInternalFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         quesInternalFrameLayout.setVerticalGroup(
             quesInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quesInternalFrameLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(quesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
@@ -93,17 +119,25 @@ public class HomeForm extends javax.swing.JFrame {
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopPaneLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(detailsInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(quesInternalFrame)
+                .addGap(25, 25, 25))
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopPaneLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DesktopPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(detailsInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DesktopPaneLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
+        DesktopPane.setLayer(detailsInternalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopPane.setLayer(quesInternalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         MainMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -143,11 +177,15 @@ public class HomeForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DesktopPane)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DesktopPane)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,13 +200,15 @@ public class HomeForm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MainMenu;
     private javax.swing.ButtonGroup btnGroupLanguage;
+    private caware.InfoPanel detailPanel;
+    private javax.swing.JInternalFrame detailsInternalFrame;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuResults;
     private javax.swing.JMenu menuSettings;
     private javax.swing.JMenu menuSurvey;
     private javax.swing.JInternalFrame quesInternalFrame;
-    private caware.InfoPanel quesPanel;
+    private caware.QuestionPanel quesPanel;
     private javax.swing.JRadioButtonMenuItem rbEnglish;
     private javax.swing.JRadioButtonMenuItem rbHindi;
     // End of variables declaration//GEN-END:variables
