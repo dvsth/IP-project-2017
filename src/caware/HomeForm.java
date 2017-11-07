@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package caware;
 
 import javax.swing.JInternalFrame;
@@ -15,27 +14,28 @@ import javax.swing.JInternalFrame;
 public class HomeForm extends javax.swing.JFrame {
 
     private DBHandler dbHandler;
-        
+
     /**
      * Creates new form HomeForm
      */
     public HomeForm(DBHandler db) {
         initComponents();
-        
+
         //assign database
         dbHandler = db;
-        
+
         //clean-up UI layout
-        DesktopPane.setSize(super.getSize());
+        
         detailsInternalFrame.setSize(250, 350);
-        detailPanel.setSize(detailsInternalFrame.getSize());
-        detailPanel.setDB(dbHandler);
-        detailPanel.setParent(detailsInternalFrame);
+        detailsPanel.setSize(detailsInternalFrame.getSize());
+        detailsPanel.setDB(dbHandler);
+        detailsPanel.setParent(detailsInternalFrame);
+        detailsInternalFrame.setVisible(false);
         
         quesPanel.setSize(quesInternalFrame.getSize());
         quesPanel.setDB(dbHandler);
         quesPanel.setParent(quesInternalFrame);
-        
+
         //language settings - group radiobuttons
         btnGroupLanguage.add(rbHindi);
         btnGroupLanguage.add(rbEnglish);
@@ -54,12 +54,13 @@ public class HomeForm extends javax.swing.JFrame {
         btnGroupLanguage = new javax.swing.ButtonGroup();
         DesktopPane = new javax.swing.JDesktopPane();
         detailsInternalFrame = new javax.swing.JInternalFrame();
-        detailPanel = new caware.InfoPanel();
+        detailsPanel = new caware.InfoPanel();
         quesInternalFrame = new javax.swing.JInternalFrame();
         quesPanel = new caware.QuestionPanel();
         MainMenu = new javax.swing.JMenuBar();
         menuSurvey = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menuResults = new javax.swing.JMenu();
         menuSettings = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -67,6 +68,16 @@ public class HomeForm extends javax.swing.JFrame {
         rbEnglish = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("C-Aware");
+        setMaximumSize(new java.awt.Dimension(1368, 720));
+        setMinimumSize(new java.awt.Dimension(1368, 720));
+        setName("MainFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1368, 700));
+        setResizable(false);
+
+        DesktopPane.setMaximumSize(new java.awt.Dimension(1368, 720));
+        DesktopPane.setMinimumSize(new java.awt.Dimension(1368, 720));
+        DesktopPane.setPreferredSize(new java.awt.Dimension(1368, 720));
 
         detailsInternalFrame.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         detailsInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -77,20 +88,21 @@ public class HomeForm extends javax.swing.JFrame {
         detailsInternalFrame.setPreferredSize(new java.awt.Dimension(250, 350));
         detailsInternalFrame.setVisible(true);
 
-        detailPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Basic Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        detailPanel.setMaximumSize(new java.awt.Dimension(250, 350));
-        detailPanel.setMinimumSize(new java.awt.Dimension(0, 0));
+        detailsPanel.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        detailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Basic Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        detailsPanel.setMaximumSize(new java.awt.Dimension(250, 350));
+        detailsPanel.setMinimumSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout detailsInternalFrameLayout = new javax.swing.GroupLayout(detailsInternalFrame.getContentPane());
         detailsInternalFrame.getContentPane().setLayout(detailsInternalFrameLayout);
         detailsInternalFrameLayout.setHorizontalGroup(
             detailsInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(detailPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(detailsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         detailsInternalFrameLayout.setVerticalGroup(
             detailsInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailsInternalFrameLayout.createSequentialGroup()
-                .addComponent(detailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(detailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -119,23 +131,20 @@ public class HomeForm extends javax.swing.JFrame {
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopPaneLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(detailsInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(quesInternalFrame)
-                .addGap(25, 25, 25))
+                .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(684, Short.MAX_VALUE))
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopPaneLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DesktopPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(detailsInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopPaneLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(quesInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(detailsInternalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
         DesktopPane.setLayer(detailsInternalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopPane.setLayer(quesInternalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -147,7 +156,15 @@ public class HomeForm extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Start New Basic Details");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         menuSurvey.add(jMenuItem1);
+
+        jMenuItem2.setText("jMenuItem2");
+        menuSurvey.add(jMenuItem2);
 
         MainMenu.add(menuSurvey);
 
@@ -177,9 +194,7 @@ public class HomeForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,14 +210,24 @@ public class HomeForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbHindiActionPerformed
 
-   
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        //detailsInternalFrame.show();
+        detailsInternalFrame.setVisible(true);
+        
+        System.out.println("opened first frame");
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MainMenu;
     private javax.swing.ButtonGroup btnGroupLanguage;
-    private caware.InfoPanel detailPanel;
     private javax.swing.JInternalFrame detailsInternalFrame;
+    private caware.InfoPanel detailsPanel;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuResults;
     private javax.swing.JMenu menuSettings;
