@@ -22,6 +22,8 @@ public class InfoPanel extends javax.swing.JPanel {
     private DBHandler dbHandler;
     private String[] responses;
     private JInternalFrame parentFrame;
+    private JInternalFrame nextFrame;
+
     /**
      * Creates new form InfoPanel
      */
@@ -29,82 +31,81 @@ public class InfoPanel extends javax.swing.JPanel {
 
         initComponents();
         responses = new String[4];
-        
+
     }
-    
-    public void setParent(JInternalFrame parent){
-    
-        parentFrame = parent;
-        
+
+    public void setParent(JInternalFrame parent_Frame) {
+
+        parentFrame = parent_Frame;
+
     }
-    
+
+    public void setNextFrame(JInternalFrame next_Frame) {
+
+        nextFrame = next_Frame;
+
+    }
+
     public void setDB(DBHandler db) {
-    
+
         dbHandler = db;
         System.out.println("db set");
     }
-    
-    private void populateArray(){
-        
+
+    private void populateArray() {
+
         responses[0] = age;
         responses[1] = mf;
         responses[2] = edu;
         responses[3] = name;
-        
+
     }
-    
-       
+
     private void fetchDetails() {
 
         name = txtName.getText();
         age = txtAge.getText();
-        
-        if(!isValidated())
-            JOptionPane.showMessageDialog(null, 
-                    "You have not entered the information correctly. Please try again!");
-        
-        if (isValidated()) {
-            name = txtName.getText();
-            age = txtAge.getText();
 
-            if (rbMale.isSelected()) {
-                mf = "male";
-            } else if (rbFemale.isSelected()) {
-                mf = "female";
-            }
+        if (rbMale.isSelected()) {
+            mf = "male";
+        } else if (rbFemale.isSelected()) {
+            mf = "female";
+        }
 
-            switch (cbEducation.getSelectedIndex()) {
+        switch (cbEducation.getSelectedIndex()) {
 
-                case 1:
-                    edu = "No Formal Education";
-                    break;
+            case 1:
+                edu = "No Formal Education";
+                break;
 
-                case 2:
-                    edu = "Primary";
-                    break;
+            case 2:
+                edu = "Primary";
+                break;
 
-                case 3:
-                    edu = "Middle";
-                    break;
+            case 3:
+                edu = "Middle";
+                break;
 
-                case 4:
-                    edu = "Secondary";
-                    break;
+            case 4:
+                edu = "Secondary";
+                break;
 
-                case 5:
-                    edu = "Higher Secondary";
-                    break;
+            case 5:
+                edu = "Higher Secondary";
+                break;
 
-                case 6:
-                    edu = "Graduation";
-                    break;
+            case 6:
+                edu = "Graduation";
+                break;
 
-            }
         }
 
     }
 
     private boolean isValidated() {
+
+        name = txtName.getText();
+        age = txtAge.getText();
 
         if (name.equals("")) {
             return false;
@@ -229,12 +230,17 @@ public class InfoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        
-        fetchDetails();
-        populateArray();
-        dbHandler.addInfoResponse(responses);
-        parentFrame.doDefaultCloseAction();
-                
+
+        if (!isValidated()) {
+            JOptionPane.showMessageDialog(null,
+                    "You have not entered the information correctly. Please try again!");
+        } else {
+            fetchDetails();
+            populateArray();
+            dbHandler.addInfoResponse(responses);
+            nextFrame.setVisible(true);
+            parentFrame.doDefaultCloseAction();
+        }
     }//GEN-LAST:event_btnNextActionPerformed
 
 

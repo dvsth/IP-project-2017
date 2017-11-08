@@ -18,7 +18,7 @@ public class QuestionPanel extends javax.swing.JPanel {
     private JInternalFrame parentFrame;
     private QuestionFeeder questionFeeder;
     private int questionIndex; //zero-based index
-    
+
     /**
      * Creates new form QuestionPanel
      */
@@ -26,7 +26,7 @@ public class QuestionPanel extends javax.swing.JPanel {
         initComponents();
         responses = new String[24];
         questionFeeder = new QuestionFeeder();
-        
+
     }
 
     public void setParent(JInternalFrame parent) {
@@ -39,20 +39,18 @@ public class QuestionPanel extends javax.swing.JPanel {
         System.out.println("db set");
     }
 
-    public void setLanguage(int i){
-    
+    public void setLanguage(int i) {
+
         questionFeeder.setLanguage(i);
-        
+
     }
-    
-    public void initiate(){
-    
+
+    public void initiate() {
+
         lblQuestion.setText(questionFeeder.nextQuestion());
-        
+
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,10 +73,20 @@ public class QuestionPanel extends javax.swing.JPanel {
         btnYes.setBackground(new java.awt.Color(0, 102, 51));
         btnYes.setForeground(new java.awt.Color(255, 255, 255));
         btnYes.setText("Yes");
+        btnYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYesActionPerformed(evt);
+            }
+        });
 
         btnNo.setBackground(new java.awt.Color(204, 0, 0));
         btnNo.setForeground(new java.awt.Color(255, 255, 255));
         btnNo.setText("No");
+        btnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,6 +117,39 @@ public class QuestionPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
+
+        responses[questionIndex] = "1";
+        if (questionIndex == 23) {
+            btnYes.setEnabled(false);
+            btnNo.setEnabled(false);
+            saveToDB();
+        } else {
+            lblQuestion.setText(questionFeeder.nextQuestion());
+        }
+        questionIndex++;
+
+    }//GEN-LAST:event_btnYesActionPerformed
+
+    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
+
+        responses[questionIndex] = "0";
+        if (questionIndex == 23) {
+            btnYes.setEnabled(false);
+            btnNo.setEnabled(false);
+            saveToDB();
+        } else {
+             lblQuestion.setText(questionFeeder.nextQuestion());
+        }
+        questionIndex++;
+
+    }//GEN-LAST:event_btnNoActionPerformed
+
+    private void saveToDB() {
+
+        dbHandler.addQuestionResponse(responses);
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNo;

@@ -30,12 +30,16 @@ public class HomeForm extends javax.swing.JFrame {
         detailsPanel.setSize(detailsInternalFrame.getSize());
         detailsPanel.setDB(dbHandler);
         detailsPanel.setParent(detailsInternalFrame);
+        detailsPanel.setNextFrame(quesInternalFrame);
         detailsInternalFrame.setVisible(false);
         
         quesPanel.setSize(quesInternalFrame.getSize());
         quesPanel.setDB(dbHandler);
         quesPanel.setParent(quesInternalFrame);
-
+        quesPanel.setLanguage(1);
+        quesPanel.initiate();
+        quesInternalFrame.setVisible(false);
+        
         //language settings - group radiobuttons
         btnGroupLanguage.add(rbHindi);
         btnGroupLanguage.add(rbEnglish);
@@ -59,8 +63,7 @@ public class HomeForm extends javax.swing.JFrame {
         quesPanel = new caware.QuestionPanel();
         MainMenu = new javax.swing.JMenuBar();
         menuSurvey = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuStartNew = new javax.swing.JMenuItem();
         menuResults = new javax.swing.JMenu();
         menuSettings = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -77,7 +80,6 @@ public class HomeForm extends javax.swing.JFrame {
 
         DesktopPane.setMaximumSize(new java.awt.Dimension(1368, 720));
         DesktopPane.setMinimumSize(new java.awt.Dimension(1368, 720));
-        DesktopPane.setPreferredSize(new java.awt.Dimension(1368, 720));
 
         detailsInternalFrame.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         detailsInternalFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -154,17 +156,14 @@ public class HomeForm extends javax.swing.JFrame {
         menuSurvey.setText("Survey");
         menuSurvey.setName(""); // NOI18N
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Start New Basic Details");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuStartNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        menuStartNew.setText("Start New Record");
+        menuStartNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuStartNewActionPerformed(evt);
             }
         });
-        menuSurvey.add(jMenuItem1);
-
-        jMenuItem2.setText("jMenuItem2");
-        menuSurvey.add(jMenuItem2);
+        menuSurvey.add(menuStartNew);
 
         MainMenu.add(menuSurvey);
 
@@ -174,6 +173,7 @@ public class HomeForm extends javax.swing.JFrame {
         menuSettings.setText("Settings");
         menuSettings.add(jSeparator1);
 
+        rbHindi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         rbHindi.setText("Hindi");
         rbHindi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,8 +182,14 @@ public class HomeForm extends javax.swing.JFrame {
         });
         menuSettings.add(rbHindi);
 
+        rbEnglish.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         rbEnglish.setSelected(true);
         rbEnglish.setText("English");
+        rbEnglish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbEnglishActionPerformed(evt);
+            }
+        });
         menuSettings.add(rbEnglish);
 
         MainMenu.add(menuSettings);
@@ -207,17 +213,25 @@ public class HomeForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbHindiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHindiActionPerformed
-        // TODO add your handling code here:
+        
+        quesPanel.setLanguage(0);
+        
     }//GEN-LAST:event_rbHindiActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuStartNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuStartNewActionPerformed
 
         //detailsInternalFrame.show();
         detailsInternalFrame.setVisible(true);
         
         System.out.println("opened first frame");
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuStartNewActionPerformed
+
+    private void rbEnglishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbEnglishActionPerformed
+        
+        quesPanel.setLanguage(1);
+        
+    }//GEN-LAST:event_rbEnglishActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -226,11 +240,10 @@ public class HomeForm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnGroupLanguage;
     private javax.swing.JInternalFrame detailsInternalFrame;
     private caware.InfoPanel detailsPanel;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuResults;
     private javax.swing.JMenu menuSettings;
+    private javax.swing.JMenuItem menuStartNew;
     private javax.swing.JMenu menuSurvey;
     private javax.swing.JInternalFrame quesInternalFrame;
     private caware.QuestionPanel quesPanel;
