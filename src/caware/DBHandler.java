@@ -66,10 +66,8 @@ public class DBHandler {
 
     public DBHandler() {
 
-        
 //        boolean conSuccess = false;
 //        int conTryCounter = 0;
-
 //        while (!conSuccess) {
 //            conTryCounter++;
 //            if (conTryCounter == 100) {
@@ -78,30 +76,24 @@ public class DBHandler {
 //                break;
 //
 //            }
-            try {
+        try {
 
-                connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/cawaredb", "root", "root");
-                System.out.println("Database connection success.");
-                statement = connection.createStatement();
-                resultSet = statement.getResultSet();
-                
-                createTable();
-             
-                
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cawaredb", "root", "root");
+            System.out.println("Database connection success.");
+            statement = connection.createStatement();
+            resultSet = statement.getResultSet();
 
-            } catch (Exception e) {
-                
-                JOptionPane.showMessageDialog(null, e);
-                
-            }
+            createTable();
 
-        
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e);
+
+        }
 
     }
-    
-       
-    
+
     // Creating Tables
     private void createTable() {
 
@@ -120,14 +112,14 @@ public class DBHandler {
                 + ")";
 
         try {
-            
+
             statement.execute(CREATE_CONTACTS_TABLE);
             System.out.println("table created");
-            
+
         } catch (SQLException ex) {
-           
+
             JOptionPane.showMessageDialog(null, ex);
-            
+
         }
 
     }
@@ -138,18 +130,15 @@ public class DBHandler {
 //        QUESTION_ARRAY = new String[]{DEM_AGE, DEM_SEX, DEM_EDU, DEM_NAME, QUES_1, QUES_2, QUES_3,
 //            QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13,
 //            QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, QUES_23, QUES_24};
-
         String INSERT_RESPONSE = "INSERT INTO RESPONSES(AGE, SEX, EDU, NAME) "
                 + "VALUES(? , ? , ? , ? )";
 
-       
-        
         try {
             PreparedStatement stmt = connection.prepareStatement(INSERT_RESPONSE);
             for (int i = 1; i < inputResponses.length + 1; i++) {
 
-                stmt.setString(i, inputResponses[i-1]);
-                
+                stmt.setString(i, inputResponses[i - 1]);
+
             }
             System.out.println(stmt.toString());
             stmt.execute();
@@ -160,29 +149,38 @@ public class DBHandler {
 
     }
 
-    
     public void addQuestionResponse(String[] inputResponses) {
 
         //initialize array containing all questions
 //        QUESTION_ARRAY = new String[]{DEM_AGE, DEM_SEX, DEM_EDU, DEM_NAME, QUES_1, QUES_2, QUES_3,
 //            QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13,
 //            QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, QUES_23, QUES_24};
+        String QUERY_ID = "SELECT MAX(ID) FROM RESPONSES";
+        String maxID = "";
 
-         String INSERT_RESPONSE = "INSERT INTO RESPONSES(QUES_1, QUES_2, QUES_3,"
-                + " QUES_4, QUES_5, QUES_6, QUES_7, QUES_8, QUES_9, QUES_10, QUES_11, QUES_12, QUES_13, "
-                + "QUES_14, QUES_15, QUES_16, QUES_17, QUES_18, QUES_19, QUES_20, QUES_21, QUES_22, "
-                + "QUES_23, QUES_24) VALUES("
-                + "? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? "
-                + ", ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )";
+        try {
+            
+            resultSet = statement.executeQuery(QUERY_ID);
+            resultSet.first();
+            maxID = resultSet.getString(0);
+            System.out.println(maxID);
+            
+        } catch (Exception e) {
 
-       
+            System.out.println("error");
+        }
         
+        String INSERT_RESPONSE = "UPDATE RESPONSES SET QUES_1 = ?, QUES_2 = ?, QUES_3 = ?,"
+                + " QUES_4 = ?, QUES_5 = ?, QUES_6 = ?, QUES_7 = ?, QUES_8 = ?, QUES_9 = ?, QUES_10 = ?, QUES_11 = ?, QUES_12 = ?, QUES_13 = ?, "
+                + "QUES_14 = ?, QUES_15 = ?, QUES_16 = ?, QUES_17 = ?, QUES_18 = ?, QUES_19 = ?, QUES_20 = ?, QUES_21 = ?, QUES_22 = ?, "
+                + "QUES_23 = ?, QUES_24 = ? WHERE ID = " + maxID;
+
         try {
             PreparedStatement stmt = connection.prepareStatement(INSERT_RESPONSE);
             for (int i = 1; i < inputResponses.length + 1; i++) {
 
-                stmt.setString(i, inputResponses[i-1]);
-                
+                stmt.setString(i, inputResponses[i - 1]);
+
             }
             System.out.println(stmt.toString());
             stmt.execute();
@@ -192,9 +190,7 @@ public class DBHandler {
         }
 
     }
-    
-    
-    
+
 //    public void writeToCSV() {
 //
 //        //if you ever want to create unique exports per attempt
