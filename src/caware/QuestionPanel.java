@@ -6,6 +6,7 @@
 package caware;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,12 +64,17 @@ public class QuestionPanel extends javax.swing.JPanel {
         lblQuestion = new javax.swing.JLabel();
         btnYes = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Survey Questions"));
 
-        lblQuestion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblQuestion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblQuestion.setText("jLabel1");
+        lblQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblQuestion.setMaximumSize(new java.awt.Dimension(50, 100));
+        lblQuestion.setMinimumSize(new java.awt.Dimension(50, 100));
+        lblQuestion.setPreferredSize(new java.awt.Dimension(50, 100));
 
         btnYes.setBackground(new java.awt.Color(0, 102, 51));
         btnYes.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,31 +94,39 @@ public class QuestionPanel extends javax.swing.JPanel {
             }
         });
 
+        jProgressBar1.setMaximum(24);
+        jProgressBar1.setMinimum(1);
+        jProgressBar1.setOrientation(1);
+        jProgressBar1.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 79, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 81, Short.MAX_VALUE)))
+                        .addGap(0, 0, 0)
+                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNo)
-                    .addComponent(btnYes))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNo)
+                            .addComponent(btnYes)))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -132,14 +146,16 @@ public class QuestionPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnYesActionPerformed
 
     private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
-
+        
+        jProgressBar1.setValue(questionIndex);
         responses[questionIndex] = "0";
         if (questionIndex == 23) {
             btnYes.setEnabled(false);
             btnNo.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Survey complete! Thank you for your time.");
             saveToDB();
         } else {
-             lblQuestion.setText(questionFeeder.nextQuestion());
+             lblQuestion.setText("<html>" + questionFeeder.nextQuestion() + "<html>");
         }
         questionIndex++;
 
@@ -154,6 +170,7 @@ public class QuestionPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnYes;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblQuestion;
     // End of variables declaration//GEN-END:variables
 }

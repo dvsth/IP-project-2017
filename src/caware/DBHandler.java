@@ -159,17 +159,16 @@ public class DBHandler {
         String maxID = "";
 
         try {
-            
+
             resultSet = statement.executeQuery(QUERY_ID);
             resultSet.first();
-            maxID = resultSet.getString(0);
-            System.out.println(maxID);
-            
+            maxID = resultSet.getString(1);
+
         } catch (Exception e) {
 
             System.out.println("error");
         }
-        
+
         String INSERT_RESPONSE = "UPDATE RESPONSES SET QUES_1 = ?, QUES_2 = ?, QUES_3 = ?,"
                 + " QUES_4 = ?, QUES_5 = ?, QUES_6 = ?, QUES_7 = ?, QUES_8 = ?, QUES_9 = ?, QUES_10 = ?, QUES_11 = ?, QUES_12 = ?, QUES_13 = ?, "
                 + "QUES_14 = ?, QUES_15 = ?, QUES_16 = ?, QUES_17 = ?, QUES_18 = ?, QUES_19 = ?, QUES_20 = ?, QUES_21 = ?, QUES_22 = ?, "
