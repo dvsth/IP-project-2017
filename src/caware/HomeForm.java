@@ -65,6 +65,7 @@ public class HomeForm extends javax.swing.JFrame {
         menuSurvey = new javax.swing.JMenu();
         menuStartNew = new javax.swing.JMenuItem();
         menuResults = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuSettings = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         rbHindi = new javax.swing.JRadioButtonMenuItem();
@@ -168,6 +169,11 @@ public class HomeForm extends javax.swing.JFrame {
         MainMenu.add(menuSurvey);
 
         menuResults.setText("Results");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("View Dataset");
+        menuResults.add(jMenuItem1);
+
         MainMenu.add(menuResults);
 
         menuSettings.setText("Settings");
@@ -240,6 +246,7 @@ public class HomeForm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnGroupLanguage;
     private javax.swing.JInternalFrame detailsInternalFrame;
     private caware.InfoPanel detailsPanel;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuResults;
     private javax.swing.JMenu menuSettings;

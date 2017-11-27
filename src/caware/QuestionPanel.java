@@ -68,10 +68,10 @@ public class QuestionPanel extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Survey Questions"));
 
-        lblQuestion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblQuestion.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblQuestion.setText("jLabel1");
-        lblQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblQuestion.setMaximumSize(new java.awt.Dimension(50, 100));
         lblQuestion.setMinimumSize(new java.awt.Dimension(50, 100));
         lblQuestion.setPreferredSize(new java.awt.Dimension(50, 100));
@@ -94,8 +94,8 @@ public class QuestionPanel extends javax.swing.JPanel {
             }
         });
 
-        jProgressBar1.setMaximum(24);
-        jProgressBar1.setMinimum(1);
+        jProgressBar1.setMaximum(23);
+        jProgressBar1.setMinimum(-1);
         jProgressBar1.setOrientation(1);
         jProgressBar1.setToolTipText("");
 
@@ -105,11 +105,13 @@ public class QuestionPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
                     .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,7 +134,7 @@ public class QuestionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
-
+        jProgressBar1.setValue(questionIndex);
         responses[questionIndex] = "1";
         if (questionIndex == 23) {
             btnYes.setEnabled(false);
@@ -148,11 +150,11 @@ public class QuestionPanel extends javax.swing.JPanel {
     private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
         
         jProgressBar1.setValue(questionIndex);
+        
         responses[questionIndex] = "0";
         if (questionIndex == 23) {
             btnYes.setEnabled(false);
             btnNo.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Survey complete! Thank you for your time.");
             saveToDB();
         } else {
              lblQuestion.setText("<html>" + questionFeeder.nextQuestion() + "<html>");
@@ -164,7 +166,8 @@ public class QuestionPanel extends javax.swing.JPanel {
     private void saveToDB() {
 
         dbHandler.addQuestionResponse(responses);
-
+        JOptionPane.showMessageDialog(null, "Your responses have been saved.\nThank you for your time!");
+        parentFrame.doDefaultCloseAction();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
