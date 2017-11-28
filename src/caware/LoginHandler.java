@@ -42,12 +42,13 @@ public class LoginHandler {
 
     public boolean authenticate(String id, String password) {
 
-        String query = "select * from users where " + "uid = " + id + " and password = " + password;
+        String query = "select * from users where uid = '" + id + "' and password = '" + password + "'";
         try {
             resultSet = statement.executeQuery(query);
             return resultSet.first();
         } catch (Exception e) {
             System.out.println("LoginHandler - Failed to get result from users table!");
+            e.printStackTrace();
         }
 
         return false;
