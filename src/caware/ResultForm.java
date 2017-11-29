@@ -138,15 +138,18 @@ public class ResultForm extends javax.swing.JFrame {
         loadAll();
     }//GEN-LAST:event_btnLoadActionPerformed
 
-    private void loadAll(){
+    private void loadAll() {
+        //erase existing table
+        while(model.getRowCount()!=0)
+
         results = dbHandler.getAllRecords();
         try {
             Object[] row = new Object[29];
             while (results.next()) {
-                for(int i = 1; i < 30 ; i++)
-                    row[i-1] = results.getString(i);
+                for (int i = 1; i < 30; i++) {
+                    row[i - 1] = results.getString(i);
+                }
                 model.addRow(row);
-                System.out.println(row);
             }
         } catch (Exception e) {
             System.out.println("Failed to add rows to table");
@@ -158,10 +161,17 @@ public class ResultForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       int[] selections = resultTable.getSelectedRows();
-       dbHandler.deleteRows(selections);
-       loadAll();
-       
+        int[] selectedIndices = resultTable.getSelectedRows();
+
+        int[] selectedIDs = new int[selectedIndices.length];
+
+        for (int i = 0; i < selectedIndices.length; i++) {
+            selectedIDs[i] = Integer.parseInt(model.getValueAt(selectedIndices[i], 0).toString());
+            System.out.println(selectedIDs[i]);
+        }
+        dbHandler.deleteRows(selectedIDs);
+        loadAll();
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     public void setDB(DBHandler db) {

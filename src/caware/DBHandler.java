@@ -190,28 +190,27 @@ public class DBHandler {
 
     }
 
-    public ResultSet getAllRecords(){
-    
+    public ResultSet getAllRecords() {
+
         String query = "select * from responses";
-        try{
-        resultSet = statement.executeQuery(query);
-        }
-        catch(Exception e){
+        try {
+            resultSet = statement.executeQuery(query);
+        } catch (Exception e) {
             System.out.println("Failed to get all records from table");
             e.printStackTrace();
         }
         return resultSet;
     }
-    
-    public void deleteRows(int[] rows){
-        for(int i : rows){
-            try{
-            statement.execute("delete from responses where id = '" + i + "'");
-            }
-            catch(Exception e){
+
+    public void deleteRows(int[] rows) {
+        for (int i : rows) {
+            try {
+                statement.execute("delete from responses where id = '" + i + "'");
+            } catch (Exception e) {
                 System.out.println("failed to delete responses");
                 e.printStackTrace();
             }
-        
+
+        }
     }
-    }
+}
