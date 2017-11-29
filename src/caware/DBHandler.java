@@ -190,69 +190,28 @@ public class DBHandler {
 
     }
 
-//    public void writeToCSV() {
-//
-//        //if you ever want to create unique exports per attempt
-//        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-//        //timestamp = dateFormat.format(new Date());
-//        File exportFolder = new File(System.
-//                + File.separator + "C-Aware");
-//
-//        if (!exportFolder.exists()) {
-//            exportFolder.mkdir();
-//
-//        }
-//
-//        File exportCSV;
-//        PrintWriter writer;
-//
-//        try {
-//
-//            exportCSV = new File(exportFolder, "C-AwareDatabase.csv");
-//
-//            //if (!exportCSV.exists()) {
-//            exportCSV.createNewFile();
-//            //}
-//
-//            writer = new PrintWriter(new FileWriter(exportCSV));
-//
-//            SQLiteDatabase db = getReadableDatabase();                           //open the database for reading
-//
-//            Cursor curCSV = db.rawQuery("Select * from responses", null);      //feed the table to cursor
-//            Log.d(null, "row count is: " + curCSV.getCount());
-//
-//            //write header of CSV
-//            writer.println("key, age, sex, edu, name, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, "
-//                    + "q15, q16, q17, q18, q19, q20, q21, q22, q23, q24");
-//
-//            int count = 0;
-//            while (curCSV.moveToNext()) {
-//
-//                String record = "";
-//
-//                for (int i = 0; i < 28; i++) {
-//                    record = record.concat(curCSV.getString(i) + ",");
-//                }
-//
-//                record = record.concat(curCSV.getString(28));
-//
-//                writer.println(record);
-//                count++;
-//                Log.wtf(null, "value of record is:" + record);
-//                Log.d(null, "" + count);
-//
-//            }
-//
-//            writer.close();
-//            curCSV.close();
-//            db.close();
-//
-//        } catch (Exception exc) {
-//
-//            Log.e(TAG, "writeToCSV: " + exc.toString(), null);
-//            exc.printStackTrace();
-//
-//        }
-//
-//    }
-}
+    public ResultSet getAllRecords(){
+    
+        String query = "select * from responses";
+        try{
+        resultSet = statement.executeQuery(query);
+        }
+        catch(Exception e){
+            System.out.println("Failed to get all records from table");
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public void deleteRows(int[] rows){
+        for(int i : rows){
+            try{
+            statement.execute("delete from responses where id = '" + i + "'");
+            }
+            catch(Exception e){
+                System.out.println("failed to delete responses");
+                e.printStackTrace();
+            }
+        
+    }
+    }

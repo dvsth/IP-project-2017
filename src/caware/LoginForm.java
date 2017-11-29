@@ -13,8 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class LoginForm extends javax.swing.JFrame {
 
-    LoginHandler loginHandler;  //handles the login-authentication
-
+    private LoginHandler loginHandler;  //handles the login-authentication
+    private DBHandler dbHandler;    //database containing the dataset, to be sent to ResultForm
+    
     /**
      * Creates new form LoginForm
      */
@@ -23,6 +24,11 @@ public class LoginForm extends javax.swing.JFrame {
         loginHandler = new LoginHandler();
     }
 
+     public void setDB(DBHandler db)
+    {
+        dbHandler = db;
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,6 +132,10 @@ public class LoginForm extends javax.swing.JFrame {
         System.out.println(pass);
         if (loginHandler.authenticate(id, pass)) {
             JOptionPane.showMessageDialog(null, "Login Success!");
+            ResultForm resultForm = new ResultForm();
+            resultForm.setDB(dbHandler);
+            resultForm.setVisible(true);
+            
         } else
         {
             JOptionPane.showMessageDialog(null, "Incorrect ID or Password. Please try again!");
